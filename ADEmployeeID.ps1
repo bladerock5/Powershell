@@ -1,0 +1,1 @@
+﻿Get-ADUser -Filter * -SearchBase "OU=6700, OU=RF, DC=RF, DC=RSHBANK, DC=RU" -Properties EmployeeID | Select-Object Name, EmployeeID > D:\222.txt

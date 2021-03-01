@@ -1,0 +1,1 @@
+Set-ItemProperty -Path  "HKCU:\Software\PDFCreator.net\Settings\ConversionProfiles\0" -name "OpenViewer" -Value "False"

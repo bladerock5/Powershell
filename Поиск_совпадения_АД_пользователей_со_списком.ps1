@@ -1,0 +1,1 @@
+﻿(get-aduser -Filter * -SearchBase "OU=6700, OU=RF, DC=RF, DC=RSHBANK, DC=RU").SamAccountName | ForEach-Object {Select-String -Path C:\temp\111.txt -pattern $_ | Select-Object Line} > C:\temp\222.txt

@@ -1,0 +1,5 @@
+﻿$log = "$($env:WINDIR)\Logs\temp\ErrorRDSH.log"
+$curd = Get-Date -UFormat "%Y.%m.%d - %H:%M"
+Add-Content -Path $log -Value "$curd --------------------------------------------"
+Add-Content -Path $log -Value "Stopping RDSH $b"
+Add-Content -Path $log -Value "No Ping"

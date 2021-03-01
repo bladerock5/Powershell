@@ -1,0 +1,1 @@
+﻿(Get-ADGroupMember 6700-SG-GPF-DL_FL_R).Name | ForEach-Object {Select-String -Path C:\temp\USB.txt -pattern $_ | Select-Object Line} > C:\temp\222.txt

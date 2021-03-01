@@ -1,0 +1,1 @@
+﻿(Get-ADUser -Filter  {(PasswordNeverExpires -eq "True")} -SearchBase "OU=6700, OU=RF, DC=RF, DC=RSHBANK, DC=RU").Name

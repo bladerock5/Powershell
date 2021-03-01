@@ -1,0 +1,1 @@
+﻿(Get-ADObject -LDAPFilter "(objectClass=computer)" -SearchBase 'OU=Soft,OU=Hosts,OU=DaaS2019,OU=CTXSVR,OU=SERVERS,OU=MSK02,OU=OFFICES,DC=office,DC=softline,DC=ru').Name | Sort-Object

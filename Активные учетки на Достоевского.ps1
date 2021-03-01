@@ -1,0 +1,1 @@
+﻿(get-aduser -Filter {(Enabled -eq "True")} -SearchBase "OU=Users, OU=_6700, OU=6700, OU=RF, DC=RF, DC=RSHBANK, DC=RU").count

@@ -1,0 +1,1 @@
+﻿ Select-String -Path C:\Temp\111.txt -Pattern "Татарстанский" | Select-Object Line > C:\Temp\222.txt

@@ -1,0 +1,95 @@
+Add-PSSnapin VeeamPSSnapin
+$Jobs = Get-VBRJob
+Foreach($Job in $Jobs)
+{
+"`n"
+$a = Get-VBRJob -Name $Job.Name | Get-VBRJobObject
+$b = get-vbrjob -name $Job.Name | Get-VBRJobScheduleOptions
+Write-Host "Job Name:" $Job.Name
+$b.OptionsDaily.TimeLocal
+$b.OptionsDaily.DaysSrv
+#$b.OptionsMonthly
+Write-Host  "Object BackUp Name:" 
+$a.object.Name
+"`n"
+}
+
+___________________________________________________________________
+
+Add-PSSnapin VeeamPSSnapin
+$Jobs = Get-VBRJob
+Foreach($Job in $Jobs)
+{ 
+    $JobName = $Job.Name
+    $Objects = $Job.GetObjectsInJob()
+    $Day = $Job.ScheduleOptions.OptionsDaily.DaysSrv
+    $Freq = $Job.ScheduleOptions.OptionsDaily.kind
+        If($Freq -eq "Everyday")
+            {
+                $Day = "Everyday"
+            }
+
+    $RP = $Job.GetOptions().backupstorageoptions.retainCycles
+    $VM = $Objects.Name
+        #Get Backup Repository Name
+    $RepoTarget = $Job.FindTargetRepository()
+    $RepoTarget = $RepoTarget.Name
+        #Get Next Last Backup
+    $b = get-vbrjob -name $Job.Name | Get-VBRJobScheduleOptions
+
+    "`n"
+    Write-Host 'Job Name' = $JobName
+    Write-Host 'Job Object' = $VM
+    Write-Host 'Job Days' = $Day
+    Write-Host 'Restore Points' = $RP
+    Write-Host 'Backup Repository Name' = $RepoTarget
+    Write-Host 'Last Backup' = $b.LatestRunLocal
+    Write-Host 'Next Backup' = $b.NextRun
+    
+}
+___________________________________________________________________
+
+Add-PSSnapin VeeamPSSnapin
+        $VbrJobs = Get-VBRJob | Sort-Object typetostring, name
+        $Repos = Get-VBRBackupRepository
+        
+        Foreach($Job in $VbrJobs)
+        {
+            #Get Job Name
+            $JobName = $Job.Name
+            
+            #Get VMs in Job
+            $Objects = $Job.GetObjectsInJob()
+
+            #Get Restore Points
+            $RP = $Job.GetOptions().backupstorageoptions.retainCycles
+
+            #Get Days
+            $Day = $Job.ScheduleOptions.OptionsDaily.DaysSrv
+            $Freq = $Job.ScheduleOptions.OptionsDaily.kind
+
+            If($Freq -eq "Everyday")
+            {
+                $Day = "Everyday"
+            }
+
+            #Get Backup Repository Name
+            $RepoTarget = $Job.FindTargetRepository()
+            $RepoTarget = $RepoTarget.Name
+            
+            #Get VM Name    
+            $VM = $Objects.Name
+
+            #Get Last Backup
+            $Backup = Get-VBRBackup | Where{$_.JobName -eq "$JobName"}
+            $LastBackup = $Backup.LastPointCreationTime
+                  
+            "`n"
+           $JobName
+            $VM
+            $RP
+            $Day
+           $LastBackup
+           $RepoTarget
+        }
+___________________________________________________________________

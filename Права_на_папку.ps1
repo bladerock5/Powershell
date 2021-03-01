@@ -1,0 +1,2 @@
+﻿(Get-ACL "\\10.195.40.25\working\Средний бизнес").Access  | Select @{n="DisplayName"; e={([adsisearcher]"samaccountname=$($_.IdentityReference.Value.split("\")[1])").FindOne().Properties["displayname"]}},
+	IdentityReference, FilesystemRights | Export-Csv -Encoding "Unicode" -Path "c:\temp\FolderReport.csv" -Delimiter ";"

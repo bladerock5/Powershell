@@ -1,0 +1,1 @@
+﻿Get-ADGroup -Filter * -SearchBase "OU=6700, OU=RF, DC=RF, DC=RSHBANK, DC=RU" -Properties * | Select-Object SamAccountName, Description
